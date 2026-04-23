@@ -1,4 +1,4 @@
-import { popularsection } from "../../../data/Popular"
+import { popularsection } from "../../../data/popular"
 import { Container } from "../../commons/Container/Container"
 import { Section } from "../../layout/Section/Section"
 import { GridProducts } from "./GridProducts/GridProducts"

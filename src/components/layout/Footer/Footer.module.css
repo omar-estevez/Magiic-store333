@@ -1,0 +1,90 @@
+.footer__container {
+
+    border-top: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
+    padding: 2rem 5rem;
+    text-align: center;
+    background: color-mix(in srgb, var(--surface) 100%, transparent);
+
+    .top__footer {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.8rem;
+        margin: 2.5rem;
+
+        .img__contain {
+            max-width: 15vw;
+            margin: auto;
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        .nav__contain {
+            align-content: center;
+
+            h4 {
+                color: color-mix(in srgb, var(--text-secondary) 40%, transparent);
+            }
+
+            div {
+                display: flex;
+                flex-direction: column;
+
+                span {
+                    margin: 0.4rem 0;
+
+                    a {
+                        cursor: pointer;
+                        color: color-mix(in srgb, var(--text-secondary) 40%, transparent);
+
+                        &:hover {
+                            color: color-mix(in srgb, var(--text-secondary) 100%, transparent);
+                        }
+                    }
+                }
+
+            }
+        }
+
+        .cont__contain {
+            align-content: center;
+
+            h4 {
+                color: color-mix(in srgb, var(--text-secondary) 40%, transparent);
+            }
+
+            div {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+
+                span {
+                    margin: 0.4rem;
+
+                    a {
+                        cursor: pointer;
+                        opacity: 0.5;
+
+                        &:hover {
+                            opacity: 1;
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+    .bottom__footer {
+        margin: 1rem 1rem 0rem 1rem;
+        padding: 1rem 1rem 0rem 1rem;
+        border-top: 1px solid color-mix(in srgb, var(--border) 90%, transparent);
+        text-align: right;
+
+        p {
+            opacity: 0.4;
+        }
+    }
+}

@@ -1,0 +1,6 @@
+.cards__container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.8rem;
+    margin: 1.8rem 0.5rem;
+}

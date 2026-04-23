@@ -1,0 +1,159 @@
+/* Cards */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    transition: var(--transition);
+}
+
+.card:hover {
+    border-color: var(--primary);
+}
+
+/* Buttons */
+.btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+/* Primary */
+.btn-primary {
+    position: relative;
+    background: linear-gradient(90deg, var(--primary), color-mix(in srgb, var(--primary) 50%, #fff));
+    color: var(--text);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: color 0.3s ease;
+
+    span {
+        position: relative;
+        z-index: 1;
+        color: var(--text);
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary-hover), color-mix(in srgb, var(--primary-hover) 1%, transparent));
+        border-radius: inherit;
+        z-index: 0;
+        transition: width 0.4s ease;
+    }
+
+    &:hover::before {
+        width: 100%;
+    }
+
+    &:hover {
+        color: var(--text);
+    }
+}
+
+/* Secondary (outline style) */
+.btn-secondary {
+    position: relative;
+    background: var(--surface-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transform: scaleX(0.999);
+
+    span {
+        position: relative;
+        z-index: 2;
+        color: var(--text);
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(90deg,
+                var(--primary),
+                color-mix(in srgb, var(--primary) 50%, #fff));
+
+        -webkit-mask:
+            linear-gradient(#000 0 0) content-box,
+            linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s ease;
+
+        z-index: -1;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 1px;
+        background: var(--surface-2);
+        border-radius: inherit;
+        z-index: -1;
+    }
+
+    &:hover::before {
+        transform: scaleX(1);
+    }
+
+    &:hover {
+        color: var(--text);
+    }
+}
+
+/* Badge */
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.badge-yellow {
+    background: var(--secondary);
+    color: black;
+}
+
+.badge-blue {
+    background: var(--primary);
+    color: white;
+}
+
+/* Input */
+.input {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.7rem 1rem;
+    color: var(--text);
+    width: 100%;
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* Footer */
+.footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    color: var(--text-secondary);
+}

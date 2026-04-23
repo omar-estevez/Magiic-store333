@@ -1,0 +1,23 @@
+:root {
+    --primary: #007aff;
+    --primary-hover: #1a8cff;
+
+    --secondary: #ffd700;
+    --secondary-hover: #e6c200;
+
+    --tertiary: #a758b1;
+
+    --bg: #121417;
+    --surface: #121212;
+    --surface-2: #1a1a1a;
+
+    --text: #ffffff;
+    --text-secondary: #a3a3a3;
+
+    --border: #262626;
+
+    --radius: 0.9rem;
+
+    --transition: 0.2s ease;
+    --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+}

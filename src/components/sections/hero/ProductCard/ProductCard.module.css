@@ -1,0 +1,88 @@
+/* Fondo general (importante para el look) */
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .card__container {
+        width: 26rem;
+        background: var(--text);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+
+        .card__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background: var(--text);
+
+            .header__left {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .header__avatar {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+            }
+
+            .header__username {
+                font-size: 13px;
+                font-weight: 600;
+                color: #111;
+            }
+
+            .header__menu {
+                font-size: 16px;
+                color: #555;
+            }
+        }
+
+        .card__image {
+            width: 100%;
+            height: 380px;
+            object-fit: fill;
+            background: black;
+        }
+
+        /* ACTIONS */
+        .card__actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 12px;
+            font-size: 18px;
+            color: #222;
+
+            svg {
+                cursor: pointer;
+            }
+
+            .actions__left {
+                display: flex;
+                gap: 12px;
+
+                .action__heart {
+                    color: rgba(199, 24, 24, 0.92);
+                }
+            }
+        }
+
+        .card__likes {
+            padding: 0 12px;
+            font-size: 13px;
+            color: #111;
+            margin-bottom: 4px;
+        }
+
+        .card__caption {
+            padding: 0 12px 12px;
+            font-size: 13px;
+            color: #111;
+        }
+    }
+}

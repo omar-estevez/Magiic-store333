@@ -1,0 +1,47 @@
+.icons__container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    a {
+        display: flex;
+        cursor: pointer;
+        margin: 0.1rem 1rem;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+
+        &:hover {
+            color: var(--primary-hover);
+            transform: translateY(-2px) scale(1.05);
+            transition: transform 1.5s var(--ease-smooth);
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+
+    .icons__container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100vw;
+        height: 15vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: start;
+        gap: 1.6rem;
+        background: transparent;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s ease;
+        transform: translateY(-100%);
+    }
+
+    .icons__container.active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+}

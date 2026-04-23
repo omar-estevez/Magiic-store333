@@ -105,4 +105,8 @@ MIT
 
 ## ✨ Autor
 
-Magic Store 333
+Magic Store 333 
+
+##  Develop
+
+Omar Estevez

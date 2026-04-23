@@ -7,4 +7,5 @@ export interface ButtonProps {
     right?: boolean;
     left?: boolean;
     icon?: ReactNode;
+    target: string;
 }

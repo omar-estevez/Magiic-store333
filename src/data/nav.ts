@@ -4,16 +4,16 @@ export const navigationMenu: navMenu[] = [
     {
         id: "Inicio",
         title: "Inicio",
-        url: ""
+        url: "/"
     },
     {
         id: "catalogo",
         title: "Catalogo",
-        url: ""
+        url: "/catalogo"
     },
     {
         id: "contacto",
         title: "Contacto",
-        url: ""
+        url: "/contacto"
     }
 ]

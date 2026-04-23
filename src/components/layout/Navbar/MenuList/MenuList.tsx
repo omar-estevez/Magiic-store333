@@ -11,7 +11,7 @@ export const MenuList = ({ mobileMenu }: Props) => {
         <div className={clsx(style.menulist__container, mobileMenu && style.active)}>
             {
                 navigationMenu.map((data) => (
-                    <a key={data.id}>
+                    <a key={data.id} href={data.url}>
                         {data.title}
                     </a>
                 ))

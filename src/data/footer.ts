@@ -5,17 +5,17 @@ export const navigationFooter: footerNav[] = [
     {
         id: 'home',
         name: 'Home',
-        url: ''
+        url: '/'
     },
     {
         id: 'catalogo',
         name: 'Catalogo',
-        url: ''
+        url: '/catalogo'
     },
     {
         id: 'contacto',
         name: 'Contacto',
-        url: ''
+        url: '/contacto'
     }
 ]
 
@@ -23,11 +23,11 @@ export const contactFooter: footerContact[] = [
     {
         id: 'facebook',
         icon: FaFacebook,
-        url: ''
+        url: 'https://www.facebook.com/people/Magiicstore333/61573531187625/'
     },
     {
         id: 'instagram',
         icon: FaInstagram,
-        url: ''
+        url: 'https://www.instagram.com/magiicstore333/'
     }
 ]

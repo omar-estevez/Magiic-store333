@@ -16,7 +16,7 @@ export const CardProduct = () => {
             </div>
             <div className={style.btn__container}>
                 <p>$500</p>
-                <Button link="" text="Ver Detalles" type="primary" icon={<FaArrowRight />} right />
+                <Button link="" text="Ver Detalles" target="_self" type="primary" icon={<FaArrowRight />} right />
             </div>
         </div>
     )

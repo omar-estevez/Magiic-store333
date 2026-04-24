@@ -1,0 +1,22 @@
+.container {
+    margin: 8rem;
+    display: grid;
+    grid-template-rows: 5% auto;
+    grid-template-columns: 25% auto;
+    grid-template-areas:
+        "top right "
+        "left right";
+
+    .top {
+        grid-area: top;
+    }
+
+    .left {
+        grid-area: left;
+        align-self: start;
+    }
+
+    .right {
+        grid-area: right;
+    }
+}

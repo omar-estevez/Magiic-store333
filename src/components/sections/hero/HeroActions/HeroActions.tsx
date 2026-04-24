@@ -12,8 +12,8 @@ export const HeroActions = () => {
             </div>
             <p>Seleccionamos ropa y calzado de las mejores marcas para que encuentres tu look ideal, sin complicaciones.</p>
             <div className={style.button__container}>
-                <Button text="Catalogo" link="/catalogo" target='_self' type="primary" icon={<FaArrowRight />} right />
-                <Button text="Contacto" link="/contacto" target='_self' type="secondary" />
+                <Button as='link' text="Catalogo" href="/catalogo" target='_self' right_icon={<FaArrowRight />} />
+                <Button as='link' text="Contacto" href="/contacto" target='_self' variant="secondary" />
             </div>
         </div>
     )

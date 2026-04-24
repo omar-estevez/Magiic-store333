@@ -1,0 +1,33 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.65rem;
+    margin-top: 2rem;
+
+    button {
+        width: 38px;
+        height: 38px;
+        border: 1px solid rgba(0, 122, 255, 0.4);
+        background: rgba(255, 255, 255, 0.04);
+        color: #fff;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: 0.25s ease;
+
+        &:hover {
+            background: rgba(0, 122, 255, 0.18);
+            border-color: #007aff;
+        }
+
+        &:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.pagination__number__active {
+    background: #007aff !important;
+    border-color: #007aff !important;
+}

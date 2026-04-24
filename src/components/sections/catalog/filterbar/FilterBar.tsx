@@ -1,27 +1,34 @@
-import { useState } from 'react';
 import style from './FilterBar.module.css';
+import { Button } from '../../../commons/Button/Button';
+import type { FilterBarProps } from './FilterBar.types';
 
-const items = [
-    { name: "Men", count: 124 },
-    { name: "Women", count: 102 },
-    { name: "Child", count: 56 },
+const initialItems = [
+    { id: 'men', name: "Hombre", count: 124 },
+    { id: 'women', name: "Mujer", count: 102 },
+    { id: 'child', name: "Ninnos", count: 56 },
 ];
 
 const productTypes = [
-    "Jackets",
-    "Pants",
-    "Shoes",
-    "Accessories",
-    "Others",
+    { id: 'jackets', name: "Chaquetas" },
+    { id: 'shirts', name: "Camisas" },
+    { id: 'pants', name: "Pantalones" },
+    { id: 'shoes', name: "Zapatos" },
+    { id: 'accesories', name: "Accesorios" },
 ];
 
-export const FilterBar = () => {
+export const FilterBar = ({ activeDepartment, selectedTypes, setActiveDepartment, setSelectedTypes, products }: FilterBarProps) => {
 
-    const [active, setActive] = useState('all');
-    const [selectedTypes, setSelectedTypes] = useState<string[]>([""]);
+    const items = initialItems.map(item => {
+        const count = products.filter(p => p.department === item.id).length;
+
+        return {
+            ...item,
+            count
+        };
+    });
 
     const departmentClickHandle = (name: string) => {
-        setActive(name)
+        setActiveDepartment(name);
     }
 
     const toggleTypeHandle = (type: string) => {
@@ -29,16 +36,21 @@ export const FilterBar = () => {
             prev.includes(type) ? prev.filter((item) => item !== type) : [...prev, type]);
     };
 
+    const handleButtonReset = () => {
+        setActiveDepartment("all");
+        setSelectedTypes([]);
+    }
+
     return (
         <div className={style.filterContainer}>
             <h4>Departamento</h4>
             <div className={style.dept__container}>
                 {
                     items.map((item) => (
-                        <li key={item.name} className={active === item.name ? (style.active) : ''} onClick={() => departmentClickHandle(item.name)}>
+                        <li key={item.id} className={activeDepartment === item.id ? (style.active) : ''} onClick={() => departmentClickHandle(item.id)}>
                             <span>{item.name}</span>
                             <span>
-                                {active === item.name ? '•' : item.count}
+                                {activeDepartment === item.id ? '•' : item.count}
                             </span>
                         </li>
                     ))
@@ -48,18 +60,20 @@ export const FilterBar = () => {
             <h4>Tipo de producto</h4>
             <div className={style.type__container}>
                 {productTypes.map((type) => (
-                    <li key={type}>
+                    <li key={type.id}>
                         <label>
                             <input
                                 type="checkbox"
-                                checked={selectedTypes.includes(type)}
-                                onChange={() => toggleTypeHandle(type)}
+                                checked={selectedTypes.includes(type.id)}
+                                onChange={() => toggleTypeHandle(type.id)}
                             />
-                            <span>{type}</span>
+                            <span>{type.name}</span>
                         </label>
                     </li>
                 ))}
             </div>
+
+            <Button as='button' text='Reset' onClick={handleButtonReset} />
         </div>
     )
 }

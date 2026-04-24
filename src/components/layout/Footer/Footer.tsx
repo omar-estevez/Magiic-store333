@@ -14,7 +14,7 @@ export const Footer = () => {
                     <h4>Navegacion</h4>
                     <div>
                         {navigationFooter.map((data) => (
-                            <span><a key={data.id} href={data.url}>{data.name}</a></span>
+                            <span key={data.id}><a href={data.url}>{data.name}</a></span>
                         ))}
                     </div>
                 </div>
@@ -22,7 +22,7 @@ export const Footer = () => {
                     <h4>Contacto</h4>
                     <div>
                         {contactFooter.map((data) => (
-                            <span><a key={data.id} href={data.url} target='_blank' style={data.id === 'facebook' ? { color: '#1877F2' } : { color: '#E1306C' }}><data.icon style={{ fontSize: '1.8rem' }} /></a></span>
+                            <span key={data.id}><a href={data.url} target='_blank' style={data.id === 'facebook' ? { color: '#1877F2' } : { color: '#E1306C' }}><data.icon style={{ fontSize: '1.8rem' }} /></a></span>
                         ))}
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 .container {
     margin: 8rem;
     display: grid;
-    grid-template-rows: 5% auto;
+    grid-template-rows: 8% auto;
     grid-template-columns: 25% auto;
     grid-template-areas:
         "top right "

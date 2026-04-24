@@ -1,10 +1,28 @@
 import type { ButtonProps } from "./Button.types"
 
-export const Button = ({ text, link, type, right = false, left = false, icon, target }: ButtonProps) => {
-    return (
+export const Button = (props: ButtonProps) => {
+
+    const className = `btn btn-${props.variant ?? "primary"}`;
+
+    const content = (
         <>
-            {type === 'primary' && <a className="btn btn-primary" href={link} target={target}>{left && icon} <span>{text}</span> {right && icon}</a>}
-            {type === 'secondary' && <a className="btn btn-secondary" href={link} target={target}>{left && icon} <span>{text}</span> {right && icon}</a>}
+            {props.left_icon}
+            <span>{props.text}</span>
+            {props.right_icon}
         </>
-    )
-}
+    );
+
+    if (props.as === "link") {
+        return (
+            <a className={`${className} ${props.className ?? ""}`} {...props}>
+                {content}
+            </a>
+        );
+    }
+
+    return (
+        <button className={`${className} ${props.className ?? ""}`} {...props}>
+            {content}
+        </button>
+    );
+};

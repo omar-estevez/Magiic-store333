@@ -1,11 +1,16 @@
-import { CardProduct } from "../../../../commons/CardProduct/CardProduct"
+import type { ProductType } from "../../../../../types/product.types";
+import { CardProduct } from "../../../../commons/CardProduct/CardProduct";
 
-export const ProductContainers = () => {
+interface ProductContainersProps {
+    itemsArray: ProductType[];
+}
+
+export const ProductContainers = ({ itemsArray }: ProductContainersProps) => {
     return (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.8rem', margin: '1.8rem 0.5rem' }}>
             {
-                [...new Array(12)].map((_, i: number) => (
-                    <CardProduct key={i} />
+                itemsArray && itemsArray.map((product) => (
+                    <CardProduct key={product.id} object={product} />
                 ))
             }
         </div>

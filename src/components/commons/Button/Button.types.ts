@@ -1,11 +1,19 @@
-import type { ReactNode } from "react";
+import type { ReactNode, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
 
-export interface ButtonProps {
+type BaseProps = {
     text: string;
-    link: string;
-    type: string;
-    right?: boolean;
-    left?: boolean;
-    icon?: ReactNode;
-    target: string;
-}
+    variant?: "primary" | "secondary";
+    left_icon?: ReactNode;
+    right_icon?: ReactNode;
+};
+
+export type ButtonProps =
+    | ({
+        as?: "button";
+    } & BaseProps &
+        ButtonHTMLAttributes<HTMLButtonElement>)
+    | ({
+        as: "link";
+        href: string;
+    } & BaseProps &
+        AnchorHTMLAttributes<HTMLAnchorElement>);

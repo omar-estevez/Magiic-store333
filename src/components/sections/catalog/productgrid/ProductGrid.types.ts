@@ -6,4 +6,5 @@ export interface ProductGridProps {
     products: ProductType[];
     loading: boolean;
     error: string | null;
+    searchText: string;
 }

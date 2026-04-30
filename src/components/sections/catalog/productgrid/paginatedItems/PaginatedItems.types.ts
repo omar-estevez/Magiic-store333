@@ -7,4 +7,5 @@ export interface PaginatedItemsProps {
     products: ProductType[];
     loading: boolean;
     error: string | null;
+    searchText: string;
 }

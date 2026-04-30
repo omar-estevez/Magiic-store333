@@ -3,7 +3,7 @@ import { ProductContainers } from '../productcontainers/ProductContainers';
 import style from './PaginatedItems.module.css';
 import type { PaginatedItemsProps } from './PaginatedItems.types';
 
-export const PaginatedItems = ({ itemsPerPage, activeDepartment, selectedTypes, products, loading, error }: PaginatedItemsProps) => {
+export const PaginatedItems = ({ itemsPerPage, activeDepartment, selectedTypes, products, loading, error, searchText }: PaginatedItemsProps) => {
 
     const [page, setPage] = useState(1);
 
@@ -17,9 +17,15 @@ export const PaginatedItems = ({ itemsPerPage, activeDepartment, selectedTypes, 
         return matchDepartment && matchType;
     });
 
-    const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+    const searchedProducts = filteredProducts.filter((product) => {
+        const matchSearch = searchText === "" || product.name.toLowerCase().includes(searchText);
+
+        return matchSearch;
+    })
+
+    const totalPages = Math.ceil(searchedProducts.length / itemsPerPage);
     const start = (page - 1) * itemsPerPage;
-    const currentItems = filteredProducts.slice(start, start + itemsPerPage);
+    const currentItems = searchedProducts.slice(start, start + itemsPerPage);
 
     if (loading) return <p>Cargando productos...</p>;
     if (error) return <p>{error}</p>;

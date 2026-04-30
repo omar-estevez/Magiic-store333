@@ -8,6 +8,8 @@ import { useProductStore } from '../../store/product.store';
 
 export const Catalog = () => {
 
+    const [searchText, setSearchText] = useState("");
+
     const [activeDepartment, setActiveDepartment] = useState("all");
     const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
@@ -23,16 +25,17 @@ export const Catalog = () => {
         // </div>
         <div className={style.container}>
             <div className={style.top}>
-                <SearchBar />
+                <SearchBar searchText={searchText} setSearchText={setSearchText} />
             </div>
             <div className={style.left}>
-                <FilterBar
+                {!searchText && <FilterBar
                     activeDepartment={activeDepartment}
                     selectedTypes={selectedTypes}
                     setActiveDepartment={setActiveDepartment}
                     setSelectedTypes={setSelectedTypes}
                     products={products}
-                />
+                    setSearchText={setSearchText}
+                />}
             </div>
             <div className={style.right}>
                 <ProductGrid
@@ -41,6 +44,7 @@ export const Catalog = () => {
                     products={products}
                     loading={loading}
                     error={error}
+                    searchText={searchText}
                 />
             </div>
         </div>

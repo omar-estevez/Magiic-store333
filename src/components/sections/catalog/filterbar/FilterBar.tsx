@@ -16,7 +16,7 @@ const productTypes = [
     { id: 'accesories', name: "Accesorios" },
 ];
 
-export const FilterBar = ({ activeDepartment, selectedTypes, setActiveDepartment, setSelectedTypes, products }: FilterBarProps) => {
+export const FilterBar = ({ activeDepartment, selectedTypes, setActiveDepartment, setSelectedTypes, products, setSearchText }: FilterBarProps) => {
 
     const items = initialItems.map(item => {
         const count = products.filter(p => p.department === item.id).length;
@@ -39,6 +39,7 @@ export const FilterBar = ({ activeDepartment, selectedTypes, setActiveDepartment
     const handleButtonReset = () => {
         setActiveDepartment("all");
         setSelectedTypes([]);
+        setSearchText("");
     }
 
     return (

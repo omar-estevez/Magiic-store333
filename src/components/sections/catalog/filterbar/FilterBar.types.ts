@@ -6,4 +6,5 @@ export interface FilterBarProps {
     setActiveDepartment: (value: string) => void;
     setSelectedTypes: React.Dispatch<React.SetStateAction<string[]>>;
     products: ProductType[];
+    setSearchText: React.Dispatch<React.SetStateAction<string>>;
 }

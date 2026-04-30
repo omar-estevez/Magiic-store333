@@ -13,7 +13,7 @@ export const IconList = ({ mobileMenu }: Props) => {
             <a>
                 <FiShoppingCart />
             </a>
-            <a>
+            <a href="/login">
                 <BsPerson />
             </a>
         </div>

@@ -1,0 +1,6 @@
+.card__container {
+    margin: auto;
+    width: 50%;
+    height: 100%;
+    position: relative;
+}

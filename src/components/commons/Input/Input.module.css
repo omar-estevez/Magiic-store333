@@ -1,0 +1,15 @@
+.input__styles {
+    width: 100%;
+    border-radius: var(--radius);
+    padding: 0.5rem 0.7rem;
+    font-size: 1.2rem;
+    border: 0px;
+    background: var(--surface-2);
+    color: var(--text);
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 0.1px #666;
+        transform: scaleX(1.05);
+    }
+}

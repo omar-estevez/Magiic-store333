@@ -4,7 +4,7 @@ import type { footerContact, footerNav } from "../types/footer.types";
 export const navigationFooter: footerNav[] = [
     {
         id: 'home',
-        name: 'Home',
+        name: 'Inicio',
         url: '/'
     },
     {

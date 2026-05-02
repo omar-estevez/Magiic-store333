@@ -44,37 +44,43 @@ export const FilterBar = ({ activeDepartment, selectedTypes, setActiveDepartment
 
     return (
         <div className={style.filterContainer}>
-            <h4>Departamento</h4>
-            <div className={style.dept__container}>
-                {
-                    items.map((item) => (
-                        <li key={item.id} className={activeDepartment === item.id ? (style.active) : ''} onClick={() => departmentClickHandle(item.id)}>
-                            <span>{item.name}</span>
-                            <span>
-                                {activeDepartment === item.id ? '•' : item.count}
-                            </span>
+            <div>
+                <h4>Departamento</h4>
+                <div className={style.dept__container}>
+                    {
+                        items.map((item) => (
+                            <li key={item.id} className={activeDepartment === item.id ? (style.active) : ''} onClick={() => departmentClickHandle(item.id)}>
+                                <span>{item.name}</span>
+                                <span>
+                                    {activeDepartment === item.id ? '•' : item.count}
+                                </span>
+                            </li>
+                        ))
+                    }
+                </div>
+            </div>
+
+            <div>
+                <h4>Tipo de producto</h4>
+                <div className={style.type__container}>
+                    {productTypes.map((type) => (
+                        <li key={type.id}>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedTypes.includes(type.id)}
+                                    onChange={() => toggleTypeHandle(type.id)}
+                                />
+                                <span>{type.name}</span>
+                            </label>
                         </li>
-                    ))
-                }
+                    ))}
+                </div>
             </div>
 
-            <h4>Tipo de producto</h4>
-            <div className={style.type__container}>
-                {productTypes.map((type) => (
-                    <li key={type.id}>
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={selectedTypes.includes(type.id)}
-                                onChange={() => toggleTypeHandle(type.id)}
-                            />
-                            <span>{type.name}</span>
-                        </label>
-                    </li>
-                ))}
+            <div>
+                <Button as='button' text='Reset' onClick={handleButtonReset} />
             </div>
-
-            <Button as='button' text='Reset' onClick={handleButtonReset} />
         </div>
     )
 }

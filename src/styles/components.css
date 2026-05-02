@@ -15,7 +15,7 @@
 .btn {
     padding: 0.6rem 1.2rem;
     border-radius: var(--radius);
-    font-size: 0.9rem;
+
     transition: var(--transition);
 }
 
@@ -34,6 +34,7 @@
         position: relative;
         z-index: 1;
         color: var(--text);
+        font-size: 0.9rem;
     }
 
     &::before {
@@ -74,6 +75,7 @@
         position: relative;
         z-index: 2;
         color: var(--text);
+        font-size: 0.9rem;
     }
 
     &::before {

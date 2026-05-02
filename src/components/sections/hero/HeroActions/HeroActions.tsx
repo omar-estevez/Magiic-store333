@@ -1,8 +1,12 @@
 import { FaArrowRight } from 'react-icons/fa6'
 import { Button } from '../../../commons/Button/Button'
 import style from './HeroActions.module.css'
+import { useNavigate } from 'react-router-dom';
 
 export const HeroActions = () => {
+
+    const navigate = useNavigate();
+
     return (
         <div className={style.actions__container}>
             <h1>Magic Store 333</h1>
@@ -12,8 +16,8 @@ export const HeroActions = () => {
             </div>
             <p>Seleccionamos ropa y calzado de las mejores marcas para que encuentres tu look ideal, sin complicaciones.</p>
             <div className={style.button__container}>
-                <Button as='link' text="Catalogo" href="/catalogo" target='_self' right_icon={<FaArrowRight />} />
-                <Button as='link' text="Contacto" href="/contacto" target='_self' variant="secondary" />
+                <Button as='button' text="Catalogo" onClick={() => navigate("/catalogo")} right_icon={<FaArrowRight />} />
+                <Button as='button' text="Contacto" onClick={() => navigate("/contacto")} variant="secondary" />
             </div>
         </div>
     )

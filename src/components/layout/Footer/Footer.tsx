@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom'
 import logo from '../../../assets/images/Logo_nobg.png'
 import { contactFooter, navigationFooter } from '../../../data/footer'
 import style from './Footer.module.css'
@@ -14,7 +15,7 @@ export const Footer = () => {
                     <h4>Navegacion</h4>
                     <div>
                         {navigationFooter.map((data) => (
-                            <span key={data.id}><a href={data.url}>{data.name}</a></span>
+                            <span key={data.id}><NavLink to={data.url}>{data.name}</NavLink></span>
                         ))}
                     </div>
                 </div>

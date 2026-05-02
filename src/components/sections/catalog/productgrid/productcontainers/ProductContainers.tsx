@@ -1,5 +1,6 @@
 import type { ProductType } from "../../../../../types/product.types";
 import { CardProduct } from "../../../../commons/CardProduct/CardProduct";
+import style from './ProductContainer.module.css';
 
 interface ProductContainersProps {
     itemsArray: ProductType[];
@@ -7,7 +8,7 @@ interface ProductContainersProps {
 
 export const ProductContainers = ({ itemsArray }: ProductContainersProps) => {
     return (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.8rem', margin: '1.8rem 0.5rem' }}>
+        <div className={style.product__container}>
             {
                 itemsArray && itemsArray.map((product) => (
                     <CardProduct key={product.id} object={product} />

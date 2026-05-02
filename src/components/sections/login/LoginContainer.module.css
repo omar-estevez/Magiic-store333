@@ -20,3 +20,23 @@
         opacity: 0.2;
     }
 }
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .container {
+        padding: 3rem;
+
+        &::before {
+            inset: 5rem;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .container {
+        padding: 1rem;
+
+        &::before {
+            inset: 4rem 1.4rem;
+        }
+    }
+}

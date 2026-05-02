@@ -1,70 +1,108 @@
 import { useState, type FormEvent } from "react"
 import { Input } from "../../../commons/Input/Input";
 import { Button } from "../../../commons/Button/Button";
+import type { FormData, FormErrors } from "./FormLogin.types";
+import style from './FormLogin.module.css';
+import { useAuthStore } from "../../../../store/auth.store";
+import { NavLink, useNavigate } from "react-router-dom";
+import { IoHome } from "react-icons/io5";
+import { Tooltip } from 'react-tooltip';
 
 export const FormLogin = () => {
 
-    const [loginForm, setLoginForm] = useState({ email: '', password: '' });
-    const [errors, setErrors] = useState<{ email?: string; password?: string; }>({});
-    const [loading, setLoading] = useState(false);
+    const [loginForm, setLoginForm] = useState<FormData>({ email: '', password: '' });
+    const [errors, setErrors] = useState<FormErrors>({});
 
-    const validate = () => {
+    const { login, loadingAuth, errorAuth } = useAuthStore();
 
-        if (!loginForm.email) setErrors({ email: "Email obligatorio" });
-        else if (!loginForm.email.includes('@')) setErrors({ email: "No es un email" });
+    const navigate = useNavigate();
 
-        if (!loginForm.password) setErrors({ password: "Contrasenna obligatoria" });
-        else if (loginForm.password.length < 8) setErrors({ password: "Contrasenna muy corta" });
+    const validateField = (name: string, value: string) => {
 
-        return errors;
+        switch (name) {
+            case 'email':
+                if (!value) return 'correo obligatorio'
+                if (!value.includes('@')) return 'No es un email'
+                break;
+            case 'password':
+                if (!value) return 'Contraseña obligatoria'
+                if (value.length < 8) return 'Contraseña muy corta'
+                break;
+        }
+
+        return undefined
     }
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const validateForm = () => {
+        const newErrors: FormErrors = {};
+
+        (Object.keys(loginForm) as Array<keyof FormData>).map((key) => {
+            const error = validateField(key, loginForm[key]);
+            if (error) newErrors[key] = error;
+        })
+
+        return newErrors
+    }
+
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        validate();
+        const formErrors = validateForm();
+        setErrors(formErrors);
 
+        if (Object.keys(formErrors).length !== 0) return;
 
-        console.log(validate())
+        console.log('Form submitted:', loginForm);
+
+        const response = await login(loginForm.email, loginForm.password);
+
+        console.log(response)
+
+        if (response) await navigate("/dashboard");
 
         setErrors({});
-        setLoading(true);
-
-        console.log(loginForm)
-
-        setTimeout(() => {
-            setLoading(false);
-        }, 3000);
     }
 
     return (
-        <div>
+        <div className={style.form__container}>
+            <NavLink to="/"><IoHome className={style.icon} data-tooltip-id="my-tooltip" data-tooltip-content="Pagina principal" data-tooltip-place="right" /></NavLink>
+
+
             <h3>Inicia sesion</h3>
 
             <form onSubmit={handleSubmit}>
-                <Input
-                    id="email"
-                    type="email"
-                    placeholder="correo electronico"
-                    value={loginForm.email}
-                    onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
-                    autoComplete="off"
-                />
-                {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+                <div>
+                    <p>admin@magicstore.com / 123456789</p>
+                    <Input
+                        id="email"
+                        type="email"
+                        placeholder="correo electronico"
+                        value={loginForm.email}
+                        onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
+                        autoComplete="off"
+                    />
+                    {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+                </div>
 
-                <Input
-                    id="password"
-                    type="password"
-                    placeholder="contrasenna"
-                    value={loginForm.password}
-                    onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
-                    autoComplete="off"
-                    maxLength={16}
-                />
-                {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
+                <div>
+                    <Input
+                        id="password"
+                        type="password"
+                        placeholder="contraseña"
+                        value={loginForm.password}
+                        onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
+                        autoComplete="off"
+                        maxLength={16}
+                    />
+                    {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
+                </div>
 
-                <Button as="button" type="submit" text={loading ? "Cargando..." : "Login"} variant="primary" disabled={loading} />
+
+                <Button as="button" type="submit" text={loadingAuth ? "Cargando..." : "Login"} variant="primary" disabled={loadingAuth} />
+                {errorAuth && <p style={{ color: "red" }}>{errorAuth}</p>}
             </form>
+
+            <Tooltip id="my-tooltip" />
         </div>
     )
 }

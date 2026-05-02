@@ -87,3 +87,15 @@
         }
     }
 }
+
+@media (max-width: 767px) {
+    .footer__container {
+        .top__footer {
+            grid-template-columns: repeat(1, 1fr);
+
+            .img__contain {
+                max-width: 38vw;
+            }
+        }
+    }
+}

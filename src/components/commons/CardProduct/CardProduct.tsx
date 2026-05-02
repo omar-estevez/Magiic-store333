@@ -19,7 +19,7 @@ export const CardProduct = ({ object }: CardProductProps) => {
             </div>
             <div className={style.btn__container}>
                 <p>${object.price}</p>
-                <Button text="Ver Detalles" right_icon={<FaArrowRight />} />
+                <Button text="Detalles" right_icon={<FaArrowRight />} />
             </div>
         </div>
     )

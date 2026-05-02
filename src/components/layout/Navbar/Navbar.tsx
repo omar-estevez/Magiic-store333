@@ -42,8 +42,8 @@ export const Navbar = () => {
                         <img src={logo} alt='magic_store' />
                     </div>
                     <button className={style.menu__toggle} onClick={() => setOpen(!open)} > {open ? <FiX /> : <FiMenu />}</button>
-                    <MenuList mobileMenu={open} />
-                    <IconList mobileMenu={open} />
+                    <MenuList mobileMenu={open} setOpen={setOpen} />
+                    <IconList mobileMenu={open} setOpen={setOpen} />
                 </div>
             </div>
 

@@ -3,4 +3,17 @@
     width: 50%;
     height: 100%;
     position: relative;
+    align-content: center;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .card__container {
+        width: 60%;
+    }
+}
+
+@media (max-width: 767px) {
+    .card__container {
+        width: 80%;
+    }
 }

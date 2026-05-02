@@ -1,4 +1,4 @@
-.cards__container {
+.product__container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.8rem;
@@ -6,13 +6,13 @@
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-    .cards__container {
+    .product__container {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 767px) {
-    .cards__container {
+    .product__container {
         grid-template-columns: repeat(1, 1fr);
     }
 }

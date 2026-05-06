@@ -1,0 +1,17 @@
+.dashboard__layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    height: 100vh;
+}
+
+.dashboard__content {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.dashboard__main {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+}

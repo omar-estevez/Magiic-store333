@@ -1,0 +1,18 @@
+.sidebar__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem 0rem 2rem;
+    background: linear-gradient(to right, var(--primary) 1%, var(--surface) 100%);
+
+    .menu_container {
+        img {
+            padding: 1rem 5rem 2rem;
+        }
+    }
+
+    .btn__container {
+        margin: 0rem 1rem;
+        align-self: center;
+    }
+}

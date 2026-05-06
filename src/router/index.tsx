@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { DashboardLayout } from "../layouts/DashboardLayout";
 import { Dashboard } from "../pages/dashboard/Dashboard";
 import { PrivateRoute } from "./PrivateRoute";
+import { Products } from "../pages/dashboard/Products";
 
 export default function Router() {
 
@@ -37,9 +38,10 @@ export default function Router() {
             </Route>
 
             {/* privadas */}
-            <Route element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<PrivateRoute />}>
                 <Route element={<DashboardLayout />}>
-                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route index element={<Dashboard />} />
+                    <Route path="productos" element={<Products />} />
                 </Route>
             </Route>
         </Routes>

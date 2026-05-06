@@ -1,0 +1,26 @@
+.menuside__container {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid;
+    border-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255) 50%, rgba(255, 255, 255, 0) 100%) 1;
+
+    .menu__options {
+        background: linear-gradient(to right, var(--primary) 1%, var(--surface) 100%);
+        margin: 0.2rem 0.5rem;
+        padding: 0.7rem;
+        border-radius: var(--radius);
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        gap: 0.4rem;
+
+        span {
+            color: var(--text);
+        }
+
+        &:hover {
+            cursor: pointer;
+            background: linear-gradient(to right, var(--primary-hover) 1%, var(--surface) 100%);
+        }
+    }
+}

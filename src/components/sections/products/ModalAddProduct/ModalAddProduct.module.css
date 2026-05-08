@@ -1,0 +1,28 @@
+.modal__overlay {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: color-mix(in srgb, var(--tertiary) 50%, transparent);
+}
+
+.modal__container {
+    position: absolute;
+    top: 2rem;
+    bottom: 2rem;
+    left: 2rem;
+    right: 2rem;
+    background: var(--surface);
+    border-radius: var(--radius);
+    margin: 1rem;
+    padding: 2.3rem;
+    overflow-y: auto;
+
+    .btn__modal__container {
+        position: absolute;
+        right: 2rem;
+        top: 2rem;
+    }
+}

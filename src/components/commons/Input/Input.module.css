@@ -12,4 +12,15 @@
         box-shadow: 0 0 0 0.1px #666;
         transform: scaleX(1.05);
     }
+
+
+    &[type=number]::-webkit-inner-spin-button,
+    &[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    &[type=number] {
+        -moz-appearance: textfield;
+    }
 }

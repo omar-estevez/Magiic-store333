@@ -6,7 +6,9 @@ export interface ProductType {
     department: string;
     imageUrl: string;
     description?: string;
-    active: boolean;
+    isActive: boolean;
     popular: boolean;
+    stock: number[];
+    sizes: string[];
     createdAt?: unknown;
 }

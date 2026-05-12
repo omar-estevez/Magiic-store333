@@ -1,5 +1,5 @@
 export interface ProductType {
-    id: string;
+    id?: string;
     name: string;
     price: number;
     category: string;
@@ -8,7 +8,7 @@ export interface ProductType {
     description?: string;
     isActive: boolean;
     popular: boolean;
-    stock: number[];
+    stock: Record<string, number>;
     sizes: string[];
     createdAt?: unknown;
 }

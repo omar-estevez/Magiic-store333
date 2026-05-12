@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import type { ProductType } from "../types/product.types";
 
@@ -13,6 +13,11 @@ interface ProductStore {
     addProduct: (
         product: Omit<ProductType, "id">
     ) => Promise<string | undefined>;
+    deleteProduct: (id: string) => Promise<void>;
+    updateProduct: (
+        id: string,
+        changes: Partial<ProductType>
+    ) => Promise<void>;
 }
 
 export const useProductStore = create<ProductStore>((set) => ({
@@ -76,7 +81,7 @@ export const useProductStore = create<ProductStore>((set) => ({
         }
     },
 
-    addProduct: async (product: Omit<ProductType, "id">) => {
+    addProduct: async (product) => {
         try {
             set({ loading: true, error: null });
 
@@ -106,6 +111,72 @@ export const useProductStore = create<ProductStore>((set) => ({
                 error: "Error agregando producto",
                 loading: false,
             });
+
+            throw error;
+        }
+    },
+
+    updateProduct: async (id, changes) => {
+        try {
+            set({ loading: true, error: null });
+
+            await updateDoc(doc(db, "products", id), changes);
+
+            set((state) => ({
+                allProducts: state.allProducts.map((product) =>
+                    product.id === id
+                        ? { ...product, ...changes }
+                        : product
+                ),
+
+                products: state.products.map((product) =>
+                    product.id === id
+                        ? { ...product, ...changes }
+                        : product
+                ),
+
+                loading: false,
+            }));
+
+        } catch (error) {
+            console.error(error);
+
+            set({
+                error: "Error actualizando producto",
+                loading: false,
+            });
+
+            throw error;
+        }
+    },
+
+    deleteProduct: async (id) => {
+        try {
+            set({ loading: true, error: null });
+
+            await deleteDoc(doc(db, "products", id));
+
+            set((state) => ({
+                allProducts: state.allProducts.filter(
+                    (product) => product.id !== id
+                ),
+
+                products: state.products.filter(
+                    (product) => product.id !== id
+                ),
+
+                loading: false,
+            }));
+
+        } catch (error) {
+            console.error(error);
+
+            set({
+                error: "Error eliminando producto",
+                loading: false,
+            });
+
+            throw error;
         }
     },
 }));

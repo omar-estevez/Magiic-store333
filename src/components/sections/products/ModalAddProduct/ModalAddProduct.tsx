@@ -21,7 +21,7 @@ export const ModalAddProduct = (props: ModalProps) => {
                 <Button as="button" text='' right_icon={<MdOutlineClose />} onClick={() => props.setModalIsOpen(false)} />
             </div>
 
-            <FormModal />
+            <FormModal setModalIsOpen={props.setModalIsOpen} />
 
         </Modal>
     )

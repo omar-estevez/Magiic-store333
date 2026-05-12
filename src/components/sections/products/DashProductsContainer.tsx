@@ -13,7 +13,7 @@ export const DashProductsContainer = () => {
             <h2>Productos</h2>
 
             <div className={style.btn__container}>
-                <Button as="button" text="+ annadir producto" onClick={() => setModalIsOpen(true)} />
+                <Button as="button" text="+ añadir producto" onClick={() => setModalIsOpen(true)} />
             </div>
 
             <TableProducts />

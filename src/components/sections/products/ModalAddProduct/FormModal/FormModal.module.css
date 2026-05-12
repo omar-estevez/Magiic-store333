@@ -1,16 +1,22 @@
 .form__container {
     padding: 2rem;
 
-    .first__row__form,
-    .second__row__form {
+    .container__fieldset {
+        border: 0;
+
+        &:disabled {
+            opacity: 0.3;
+            pointer-events: none;
+        }
+    }
+
+    .first__row__form {
         display: flex;
         gap: 1.5rem;
         margin: 1rem 0;
     }
 
-    .first__row__form {}
-
-    .second__row__form {
+    .first__row__form {
         select {
             width: 100%;
             border-radius: var(--radius);
@@ -135,6 +141,16 @@
                     border-radius: 50%;
                     cursor: pointer;
                 }
+            }
+        }
+    }
+
+    .btn__container {
+        text-align: center;
+
+        button {
+            &:disabled {
+                cursor: none;
             }
         }
     }

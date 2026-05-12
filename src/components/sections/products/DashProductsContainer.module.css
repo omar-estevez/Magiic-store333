@@ -1,6 +1,23 @@
 .dash__products__container {
+    position: relative;
+
     .btn__container {
+        position: absolute;
+        top: 1px;
+        right: 5px;
         text-align: end;
         margin: 0.7rem 0.5rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {}
+
+@media (max-width: 767px) {
+    .dash__products__container {
+        .btn__container {
+            button span {
+                display: none;
+            }
+        }
     }
 }

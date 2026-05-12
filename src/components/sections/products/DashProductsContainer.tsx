@@ -3,6 +3,7 @@ import { TableProducts } from "./TableProducts/TableProducts"
 import style from './DashProductsContainer.module.css';
 import { useState } from "react";
 import { ModalAddProduct } from "./ModalAddProduct/ModalAddProduct";
+import { PiPlusBold } from "react-icons/pi";
 
 export const DashProductsContainer = () => {
 
@@ -13,7 +14,7 @@ export const DashProductsContainer = () => {
             <h2>Productos</h2>
 
             <div className={style.btn__container}>
-                <Button as="button" text="+ añadir producto" onClick={() => setModalIsOpen(true)} />
+                <Button as="button" text="añadir producto" left_icon={<PiPlusBold />} onClick={() => setModalIsOpen(true)} />
             </div>
 
             <TableProducts />

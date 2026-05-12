@@ -120,7 +120,7 @@
                 border-radius: 12px;
                 overflow: hidden;
                 border: 1px solid #ddd;
-                background: #f9fafb;
+                background: transparent;
                 flex-shrink: 0;
 
                 img {
@@ -151,6 +151,86 @@
         button {
             &:disabled {
                 cursor: none;
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .form__container {
+        padding: 1rem 0rem;
+
+        .first__row__form {
+            flex-direction: column;
+        }
+
+        .third__row__form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            text-align: center;
+
+            .checkbox {
+                label {
+                    justify-content: center;
+                    gap: 0.5rem;
+                }
+            }
+
+            .sizes__inputs {
+                input {
+                    margin: 0.5rem 0;
+                    width: 100%;
+                }
+            }
+        }
+
+        .fourth__images__row {
+            .upload__container {
+                justify-items: center;
+            }
+
+            .preview__grid {
+                justify-content: center;
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .form__container {
+        padding: 1rem 0rem;
+
+        .first__row__form {
+            flex-direction: column;
+        }
+
+        .third__row__form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            .checkbox {
+                label {
+                    justify-content: start;
+                    gap: 0.5rem;
+                }
+            }
+
+            .sizes__inputs {
+
+                input {
+                    margin: 0.5rem 0;
+                    width: 100%;
+                }
+            }
+        }
+
+        .fourth__images__row {
+            .upload__container {
+                justify-items: center;
+            }
+
+            .preview__grid {
+                justify-content: center;
             }
         }
     }

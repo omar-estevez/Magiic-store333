@@ -16,13 +16,11 @@ export const ModalAddProduct = (props: ModalProps) => {
             overlayClassName={style.modal__overlay}
             ariaHideApp={false}
         >
-            <h2>Añadir producto</h2>
             <div className={style.btn__modal__container}>
                 <Button as="button" text='' right_icon={<MdOutlineClose />} onClick={() => props.setModalIsOpen(false)} />
             </div>
-
+            <h2>Añadir producto</h2>
             <FormModal setModalIsOpen={props.setModalIsOpen} />
-
         </Modal>
     )
 }

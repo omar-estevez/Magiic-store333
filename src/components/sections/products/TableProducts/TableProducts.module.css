@@ -1,33 +1,59 @@
 .table__container {
     max-width: 100%;
     margin: 1rem 2rem;
+    padding: 22px 18px;
+    border-spacing: 0 14px;
     position: relative;
+    background: rgba(5, 22, 43, .78);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .35);
+    border-radius: var(--radius);
 
     table {
         width: 100%;
-        text-align: center;
-        background: color-mix(in srgb, var(--tertiary) 10%, transparent);
-        border-radius: var(--radius);
+        text-align: left;
+        /* background: color-mix(in srgb, var(--primary) 10%, transparent); */
+        /* border-radius: var(--radius); */
+        border-collapse: collapse;
 
         thead {
-            background: color-mix(in srgb, var(--tertiary) 70%, transparent);
+            /* background: color-mix(in srgb, var(--primary) 10%, transparent); */
             font-size: 1.2rem;
             border-radius: var(--radius);
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(12px);
+            background: rgba(6, 18, 35, .92);
+
+            th {
+                padding: 0.2rem 0.5rem 1rem;
+            }
         }
 
         tbody {
-            color: var(--text-secondary);
+            color: rgba(255, 255, 255, .72);
             font-size: 1rem;
 
             tr:nth-child(even) {
-                background: color-mix(in srgb, var(--tertiary) 30%, transparent);
+                /* background: color-mix(in srgb, var(--primary) 30%, transparent); */
+
             }
 
             tr {
+                border-top: 1px solid rgba(255, 255, 255, .08);
+
+                td {
+                    padding: 0.7rem 0.2rem;
+                }
+
                 div {
                     display: flex;
                     gap: 1rem;
-                    justify-content: center;
+                    justify-content: start;
+                }
+
+                &:hover {
+                    background: rgba(255, 255, 255, .03);
+                    transition: .2s ease;
                 }
             }
 
@@ -35,10 +61,10 @@
                 cursor: pointer;
 
                 &.status__green {
-                    color: rgb(127, 255, 0, 0.6);
+                    color: rgb(0, 200, 83, 0.7);
 
                     &:hover {
-                        color: rgb(127, 255, 0, 1);
+                        color: rgb(0, 200, 83, 1);
                     }
                 }
 
@@ -60,6 +86,7 @@
                 justify-self: center;
                 overflow: hidden;
                 border-radius: 8px;
+                background: rgba(255, 255, 255, .05);
 
                 img {
                     width: 100%;
@@ -72,29 +99,29 @@
             .icon__container {
                 .heart__icon {
                     &.popular__active {
-                        color: rgb(255, 127, 80, 0.6);
+                        color: color-mix(in srgb, var(--primary) 60%, transparent);
                     }
 
                     &:hover {
-                        color: rgb(255, 127, 80, 1);
+                        color: var(--primary);
                         cursor: pointer;
                     }
                 }
 
                 .edit__icon {
-                    color: rgba(255, 255, 0, 0.6);
+                    /* color: rgba(255, 255, 0, 0.6); */
 
                     &:hover {
-                        color: rgba(255, 255, 0, 1);
+                        color: var(--primary);
                         cursor: pointer;
                     }
                 }
 
                 .trash__icon {
-                    color: rgb(255, 0, 0, 0.6);
+                    /* color: rgb(255, 0, 0, 0.6); */
 
                     &:hover {
-                        color: rgb(255, 0, 0, 1);
+                        color: var(--primary);
                         cursor: pointer;
                     }
                 }
@@ -134,5 +161,19 @@
 @keyframes spin {
     to {
         transform: rotate(360deg);
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .table__container {
+        overflow-x: auto;
+        margin: 1rem 0rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .table__container {
+        overflow-x: auto;
+        margin: 1rem 0rem;
     }
 }

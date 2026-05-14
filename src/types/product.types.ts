@@ -4,7 +4,7 @@ export interface ProductType {
     price: number;
     category: string;
     department: string;
-    imageUrl: string;
+    imageUrl: string[];
     description?: string;
     isActive: boolean;
     popular: boolean;

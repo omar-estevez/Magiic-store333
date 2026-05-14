@@ -5,11 +5,11 @@ import style from './GridProducts.module.css'
 
 export const GridProducts = () => {
 
-    const { products, loading, error, getProducts } = useProductStore();
+    const { products, loading, error, getActiveProducts } = useProductStore();
 
     useEffect(() => {
-        getProducts();
-    }, [getProducts]);
+        getActiveProducts();
+    }, [getActiveProducts]);
 
     const filteredProducts = products.filter((product) => {
 

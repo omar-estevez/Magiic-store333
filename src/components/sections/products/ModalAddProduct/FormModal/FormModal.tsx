@@ -2,7 +2,7 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Input } from "../../../../commons/Input/Input";
 import style from './FormModal.module.css'
 import { Button } from "../../../../commons/Button/Button";
-import type { formModalErrors, FormModalProps, formModalType } from "./FormModal.types";
+import type { formModalErrors, FormModalProps, formModalType, ImageType } from "./FormModal.types";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../../../lib/firebase";
 import type { ProductType } from "../../../../../types/product.types";
@@ -51,31 +51,27 @@ const sizeOptions: Record<string, Record<string, string[]>> = {
     },
 };
 
-type ImageType = {
-    file: File;
-    preview: string;
-    id: string;
-};
 
-export const FormModal = ({ setModalIsOpen }: FormModalProps) => {
+
+export const FormModal = ({ setModalIsOpen, idProduct, initialValues }: FormModalProps) => {
+
+    const initialVotes = initialValues.sizes.reduce(
+        (acc, size) => {
+            acc[size] = true;
+            return acc;
+        },
+        {} as Record<string, boolean>);
 
     const MAX_IMAGES = 5;
-    const [productForm, setProductForm] = useState<formModalType>({
-        name: '',
-        category: '',
-        department: '',
-        price: '',
-        sizes: [],
-        stock: {}
-    });
-    const [votes, setVotes] = useState<Record<string, boolean>>({});
-    const [stock, setStock] = useState<Record<string, number>>({});
+    const [productForm, setProductForm] = useState<formModalType>(initialValues);
+    const [votes, setVotes] = useState<Record<string, boolean>>(initialVotes);
+    const [stock, setStock] = useState<Record<string, number>>(initialValues.stock);
     const [errors, setErrors] = useState<formModalErrors>({});
-    const [images, setImages] = useState<ImageType[]>([]);
+    const [images, setImages] = useState<ImageType[]>(initialValues.imageUrl);
     const [, setUploadedUrls] = useState<string[]>([]);
     const [uploading, setUploading] = useState(false);
 
-    const { addProduct } = useProductStore();
+    const { addProduct, updateProduct } = useProductStore();
 
     const currentSizes = sizeOptions[productForm.category]?.[productForm.department] || [];
 
@@ -130,7 +126,7 @@ export const FormModal = ({ setModalIsOpen }: FormModalProps) => {
         );
     };
 
-    const validateField = (name: string, value: string | number | string[] | number[] | Record<string, number> | undefined) => {
+    const validateField = (name: string, value: string | number | string[] | number[] | Record<string, number> | undefined | ImageType[] | boolean) => {
 
         let selectedSizes;
         let allHaveStock;
@@ -180,11 +176,18 @@ export const FormModal = ({ setModalIsOpen }: FormModalProps) => {
         return newErrors
     }
 
+    const handleType = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        // return idProduct ? console.log('actualiza') : console.log('nuevo')
+        return idProduct ? handleUpdate(e, idProduct) : handleSubmit(e)
+    }
+
     const handleUpload = async (folder?: string) => {
         if (images.length === 0) return [];
 
         try {
-            const files = images.map(img => img.file);
+            const files = images.map(img => img.file).filter((file): file is File => file !== undefined);;
             const urls = await uploadImagesParallel(files, folder);
             setUploadedUrls(urls);
             setImages([]);
@@ -214,7 +217,7 @@ export const FormModal = ({ setModalIsOpen }: FormModalProps) => {
             price: Number(productForm.price),
             sizes: Object.keys(votes).filter(k => votes[k]),
             stock,
-            imageUrl: '',
+            imageUrl: [],
             description: '',
             isActive: true,
             popular: false,
@@ -245,8 +248,62 @@ export const FormModal = ({ setModalIsOpen }: FormModalProps) => {
         }
     }
 
+    const handleUpdate = async (e: FormEvent<HTMLFormElement>, id: string) => {
+        if (!id) return;
+        e.preventDefault();
+
+        const formErrors = validateForm();
+        setErrors(formErrors);
+        if (Object.keys(formErrors).length !== 0) return;
+
+        if (images.length === 0) {
+            Toast.info('Al menos 1 imagen')
+            return;
+        }
+
+        setUploading(true);
+
+        let updatedForm: ProductType = {
+            ...productForm,
+            price: Number(productForm.price),
+            sizes: Object.keys(votes).filter(k => votes[k]),
+            stock,
+            imageUrl: productForm.imageUrl.map((data) => data.preview),
+            description: '',
+            isActive: productForm.isActive,
+            popular: productForm.popular,
+        };
+
+        try {
+
+            const imageUrls = await handleUpload(id);
+
+            const uploadedImages = imageUrls ?? [];
+            const oldImages = productForm.imageUrl.map((img) => img.preview);
+
+            updatedForm = {
+                ...updatedForm,
+                imageUrl: [...oldImages, ...uploadedImages],
+            };
+
+            await updateProduct(id, updatedForm);
+
+            setErrors({});
+
+        } catch (error) {
+            console.error("Error al actualizar:", error);
+        } finally {
+            Toast.success('Guardo correctamente')
+
+            setTimeout(() => {
+                setModalIsOpen(false)
+                setUploading(false);
+            }, 3000);
+        }
+    }
+
     return (
-        <form className={style.form__container} onSubmit={handleSubmit}>
+        <form className={style.form__container} onSubmit={handleType}>
             <fieldset className={style.container__fieldset} disabled={uploading}>
                 <div className={style.first__row__form}>
                     <div>
@@ -353,9 +410,9 @@ export const FormModal = ({ setModalIsOpen }: FormModalProps) => {
                             {images.map((img) => (
                                 <div key={img.id} className={style.preview__card}>
                                     <img src={img.preview} alt="preview" />
-                                    <button onClick={() => removeImage(img.id)}>
+                                    {img.file && <button onClick={() => removeImage(img.id)}>
                                         ✕
-                                    </button>
+                                    </button>}
                                 </div>
                             ))}
 
@@ -376,7 +433,7 @@ export const FormModal = ({ setModalIsOpen }: FormModalProps) => {
                 </div>
             </fieldset>
             <div className={style.btn__container}>
-                <Button as="button" text={uploading ? 'Subiendo Producto' : 'Subir producto'} disabled={uploading} left_icon={uploading ? <Spinner /> : undefined} />
+                <Button as="button" text={uploading ? 'Subiendo Producto' : (idProduct ? 'Editar Producto' : 'Subir Producto')} disabled={uploading} left_icon={uploading ? <Spinner /> : undefined} />
             </div>
         </form>
     )

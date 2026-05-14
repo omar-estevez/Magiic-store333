@@ -12,11 +12,11 @@ export const CatalogContainer = () => {
     const [activeDepartment, setActiveDepartment] = useState("all");
     const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
 
-    const { products, loading, error, getProducts } = useProductStore();
+    const { products, loading, error, getActiveProducts } = useProductStore();
 
     useEffect(() => {
-        getProducts();
-    }, [getProducts]);
+        getActiveProducts();
+    }, [getActiveProducts]);
 
     return (
         <div className={style.container}>

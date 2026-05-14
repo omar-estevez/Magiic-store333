@@ -1,7 +1,6 @@
 import type { Dispatch, SetStateAction } from "react";
 
-export interface ModalProps {
-    modalIsOpen: boolean;
+export interface TableProductsProps {
+    setEditProduct: Dispatch<SetStateAction<string | null>>;
     setModalIsOpen: Dispatch<SetStateAction<boolean>>;
-    idProduct: string | null;
 }

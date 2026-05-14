@@ -1,15 +1,17 @@
 import { create } from "zustand";
-import { addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import type { ProductType } from "../types/product.types";
 
 interface ProductStore {
     products: ProductType[];
     allProducts: ProductType[];
+    product: ProductType | null;
     loading: boolean;
     error: string | null;
-    getProducts: () => Promise<void>;
+    getActiveProducts: () => Promise<void>;
     getAllProducts: () => Promise<void>;
+    getProduct: (id: string) => Promise<void>;
     addProduct: (
         product: Omit<ProductType, "id">
     ) => Promise<string | undefined>;
@@ -18,15 +20,17 @@ interface ProductStore {
         id: string,
         changes: Partial<ProductType>
     ) => Promise<void>;
+    clearProduct: () => void;
 }
 
 export const useProductStore = create<ProductStore>((set) => ({
     products: [],
     allProducts: [],
+    product: null,
     loading: false,
     error: null,
 
-    getProducts: async () => {
+    getActiveProducts: async () => {
         try {
             set({ loading: true, error: null });
 
@@ -72,6 +76,39 @@ export const useProductStore = create<ProductStore>((set) => ({
             })) as ProductType[];
 
             set({ allProducts, loading: false });
+        } catch (error) {
+            console.error(error);
+            set({
+                error: "Error cargando productos",
+                loading: false,
+            });
+        }
+    },
+
+    getProduct: async (id) => {
+        try {
+            set({ loading: true, error: null, product: null });
+
+            const productRef = doc(db, "products", id);
+
+            const snapshot = await getDoc(productRef);
+
+            if (!snapshot.exists()) {
+                set({
+                    product: null,
+                    loading: false,
+                    error: "Producto no encontrado",
+                });
+
+                return;
+            }
+
+            const product = {
+                id: snapshot.id,
+                ...snapshot.data(),
+            } as ProductType;
+
+            set({ product, loading: false });
         } catch (error) {
             console.error(error);
             set({
@@ -179,4 +216,5 @@ export const useProductStore = create<ProductStore>((set) => ({
             throw error;
         }
     },
+    clearProduct: () => set({ product: null }),
 }));

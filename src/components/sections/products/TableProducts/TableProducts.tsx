@@ -7,8 +7,9 @@ import { Toast } from "../../../commons/Toast/Toast";
 import clsx from "clsx";
 import { Tooltip } from "react-tooltip";
 import { AlertDialog } from "../../../commons/AlertDialog/AlertDialog";
+import type { TableProductsProps } from "./TableProducts.types";
 
-export const TableProducts = () => {
+export const TableProducts = ({ setEditProduct, setModalIsOpen }: TableProductsProps) => {
 
     const { allProducts, loading, error, getAllProducts, updateProduct, deleteProduct } = useProductStore();
     const [updating, setUpdating] = useState(false);
@@ -138,6 +139,7 @@ export const TableProducts = () => {
                                         />
                                         <VscEdit
                                             className={style.edit__icon}
+                                            onClick={() => { setEditProduct(data.id ?? null); setModalIsOpen(true) }}
                                             data-tooltip-id="my-tooltip"
                                             data-tooltip-content="Editar"
                                             data-tooltip-place="top"

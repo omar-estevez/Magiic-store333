@@ -14,18 +14,22 @@
         display: flex;
         gap: 1.5rem;
         margin: 1rem 0;
-    }
+        justify-content: center;
 
-    .first__row__form {
-        select {
+        div {
             width: 100%;
-            border-radius: var(--radius);
-            padding: 0.5rem 0.7rem;
-            font-size: 1.2rem;
-            border: 0px;
-            background: var(--surface-2);
-            color: var(--text);
+
+            select {
+                width: 100%;
+                border-radius: var(--radius);
+                padding: 0.5rem 0.7rem;
+                font-size: 1.2rem;
+                border: 0px;
+                background: var(--surface-2);
+                color: var(--text);
+            }
         }
+
     }
 
     .third__row__form {

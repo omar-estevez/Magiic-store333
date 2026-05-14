@@ -72,7 +72,6 @@ export const FormLogin = () => {
 
             <form onSubmit={handleSubmit}>
                 <div>
-                    <p>admin@magicstore.com / 123456789</p>
                     <Input
                         id="email"
                         type="email"

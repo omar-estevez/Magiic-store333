@@ -11,7 +11,7 @@ export const CardProduct = ({ object }: CardProductProps) => {
     return (
         <div className={style.card__container}>
             <div className={style.img__container}>
-                <img src={object.imageUrl} alt="" />
+                <img src={object.imageUrl[0]} alt="" />
             </div>
             <div className={style.title__container}>
                 <h4>{object.category}</h4>

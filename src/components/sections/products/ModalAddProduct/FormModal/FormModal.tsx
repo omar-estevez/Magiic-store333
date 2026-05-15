@@ -10,6 +10,7 @@ import { uploadImagesParallel } from "../../../../../services/cloudinaryService"
 import { Toast } from "../../../../commons/Toast/Toast";
 import { Spinner } from "../../../../commons/Spinner/Spinner";
 import { useProductStore } from "../../../../../store/product.store";
+import { CreateSlug } from "../../../../../utils/CreateSlug";
 
 const departmentOptions = [
     { value: "men", label: "Hombre" },
@@ -214,6 +215,7 @@ export const FormModal = ({ setModalIsOpen, idProduct, initialValues }: FormModa
 
         const updatedForm: ProductType = {
             ...productForm,
+            slug: CreateSlug(productForm.name),
             price: Number(productForm.price),
             sizes: Object.keys(votes).filter(k => votes[k]),
             stock,
@@ -265,6 +267,7 @@ export const FormModal = ({ setModalIsOpen, idProduct, initialValues }: FormModa
 
         let updatedForm: ProductType = {
             ...productForm,
+            slug: CreateSlug(productForm.name),
             price: Number(productForm.price),
             sizes: Object.keys(votes).filter(k => votes[k]),
             stock,

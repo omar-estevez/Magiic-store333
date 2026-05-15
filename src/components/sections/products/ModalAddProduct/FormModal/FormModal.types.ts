@@ -8,6 +8,7 @@ export interface FormModalProps {
 
 export interface formModalType {
     name: string;
+    slug: string;
     category: string;
     department: string;
     price: string;
@@ -20,6 +21,7 @@ export interface formModalType {
 
 export interface formModalErrors {
     name?: string;
+    slug?: string;
     category?: string;
     department?: string;
     price?: string;

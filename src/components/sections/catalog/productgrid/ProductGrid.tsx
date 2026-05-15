@@ -9,7 +9,7 @@ export const ProductGrid = ({ activeDepartment, selectedTypes, products, loading
 
             <PaginatedItems
                 key={`${activeDepartment}-${selectedTypes.join("-")}`}
-                itemsPerPage={6}
+                itemsPerPage={12}
                 activeDepartment={activeDepartment}
                 selectedTypes={selectedTypes}
                 products={products}

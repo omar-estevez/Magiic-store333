@@ -23,6 +23,7 @@ export const ModalAddProduct = (props: ModalProps) => {
 
     const emptyForm: formModalType = {
         name: "",
+        slug: "",
         category: "",
         department: "",
         price: "",
@@ -37,6 +38,7 @@ export const ModalAddProduct = (props: ModalProps) => {
         props.idProduct && product
             ? {
                 name: product.name,
+                slug: product.slug,
                 category: product.category,
                 department: product.department,
                 price: String(product.price),

@@ -11,6 +11,7 @@ import { DashboardLayout } from "../layouts/DashboardLayout";
 import { Dashboard } from "../pages/dashboard/Dashboard";
 import { PrivateRoute } from "./PrivateRoute";
 import { Products } from "../pages/dashboard/Products";
+import { ProductDetail } from "../components/sections/catalog/ProductDetail/ProductDetail";
 
 export default function Router() {
 
@@ -29,6 +30,7 @@ export default function Router() {
             <Route element={<PublicLayout />}>
                 <Route path="/" element={<Home />} />
                 <Route path="/catalogo" element={<Catalog />} />
+                <Route path="/catalogo/:slug" element={<ProductDetail />} />
                 <Route path="/contacto" element={<Contact />} />
             </Route>
 

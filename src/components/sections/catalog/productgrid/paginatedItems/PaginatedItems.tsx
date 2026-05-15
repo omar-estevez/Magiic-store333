@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ProductContainers } from '../productcontainers/ProductContainers';
 import style from './PaginatedItems.module.css';
 import type { PaginatedItemsProps } from './PaginatedItems.types';
+import { LoaderSection } from '../../../../commons/LoaderSection/LoaderSection';
 
 export const PaginatedItems = ({ itemsPerPage, activeDepartment, selectedTypes, products, loading, error, searchText }: PaginatedItemsProps) => {
 
@@ -27,7 +28,7 @@ export const PaginatedItems = ({ itemsPerPage, activeDepartment, selectedTypes, 
     const start = (page - 1) * itemsPerPage;
     const currentItems = searchedProducts.slice(start, start + itemsPerPage);
 
-    if (loading) return <p>Cargando productos...</p>;
+    if (loading) return <LoaderSection text='Cargando Productos...' />;
     if (error) return <p>{error}</p>;
 
     return (

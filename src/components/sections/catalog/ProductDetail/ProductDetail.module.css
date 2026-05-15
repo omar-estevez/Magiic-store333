@@ -1,0 +1,39 @@
+.detail__container {
+    min-height: 70vh;
+    padding: 5rem;
+    margin: 4rem;
+
+    .back__container {
+        margin: 1rem;
+    }
+
+    .product__container {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 0.8rem;
+
+        .child__container {
+            flex: 1;
+            align-content: center;
+        }
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .detail__container {
+        padding: 2rem 0.8rem;
+        margin: 4rem 0.8rem;
+
+    }
+}
+
+@media (max-width: 767px) {
+    .detail__container {
+        padding: 2rem 0.8rem;
+        margin: 4rem 0.8rem;
+
+        .product__container {
+            flex-flow: column wrap;
+        }
+    }
+}

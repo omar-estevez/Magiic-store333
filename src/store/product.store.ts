@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, limit, query, updateDoc, where } from "firebase/firestore";
 import { db } from "../lib/firebase";
 import type { ProductType } from "../types/product.types";
 
@@ -12,6 +12,7 @@ interface ProductStore {
     getActiveProducts: () => Promise<void>;
     getAllProducts: () => Promise<void>;
     getProduct: (id: string) => Promise<void>;
+    getProductBySlug: (slug: string) => Promise<void>;
     addProduct: (
         product: Omit<ProductType, "id">
     ) => Promise<string | undefined>;
@@ -109,6 +110,44 @@ export const useProductStore = create<ProductStore>((set) => ({
             } as ProductType;
 
             set({ product, loading: false });
+        } catch (error) {
+            console.error(error);
+            set({
+                error: "Error cargando productos",
+                loading: false,
+            });
+        }
+    },
+
+    getProductBySlug: async (slug) => {
+        try {
+            set({ loading: true, error: null });
+
+            const productsRef = collection(db, "products");
+
+            const q = query(
+                productsRef,
+                where("slug", "==", slug),
+                limit(1)
+            );
+
+            const snapshot = await getDocs(q);
+
+            if (snapshot.docs.length === 0) {
+                console.log('entra')
+                set({ loading: false, product: null, error: "Producto no encontrado" });
+                return;
+            }
+
+            const doc = snapshot.docs[0];
+
+            set({
+                loading: false,
+                product: {
+                    id: doc.id,
+                    ...doc.data(),
+                } as ProductType,
+            });
         } catch (error) {
             console.error(error);
             set({

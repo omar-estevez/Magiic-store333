@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useProductStore } from "../../../../store/product.store";
 import { CardProduct } from "../../../commons/CardProduct/CardProduct"
 import style from './GridProducts.module.css'
+import { LoaderSection } from "../../../commons/LoaderSection/LoaderSection";
 
 export const GridProducts = () => {
 
@@ -18,7 +19,7 @@ export const GridProducts = () => {
         return popularProducts;
     });
 
-    if (loading) return <p>Cargando productos...</p>;
+    if (loading) return <LoaderSection text="Cargando Productos Populares..." />;
     if (error) return <p>{error}</p>;
 
     return (

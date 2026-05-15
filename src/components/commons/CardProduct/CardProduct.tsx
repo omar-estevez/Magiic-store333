@@ -2,12 +2,17 @@ import { FaArrowRight } from "react-icons/fa6"
 import { Button } from "../Button/Button"
 import style from "./CardProduct.module.css"
 import type { ProductType } from "../../../types/product.types";
+import { useNavigate } from "react-router-dom";
+import { formatPriceCop } from "../../../utils/formatPriceCop";
 
 export interface CardProductProps {
     object: ProductType;
 }
 
 export const CardProduct = ({ object }: CardProductProps) => {
+
+    const navigate = useNavigate();
+
     return (
         <div className={style.card__container}>
             <div className={style.img__container}>
@@ -18,8 +23,8 @@ export const CardProduct = ({ object }: CardProductProps) => {
                 <h3>{object.name}</h3>
             </div>
             <div className={style.btn__container}>
-                <p>${object.price}</p>
-                <Button text="Detalles" right_icon={<FaArrowRight />} />
+                <p>{formatPriceCop(object.price)}</p>
+                <Button as="button" variant="secondary" text="Detalles" right_icon={<FaArrowRight />} onClick={() => navigate(`/catalogo/${object.slug}`)} />
             </div>
         </div>
     )

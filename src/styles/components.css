@@ -22,7 +22,9 @@
 /* Primary */
 .btn-primary {
     position: relative;
-    background: linear-gradient(90deg, var(--primary), color-mix(in srgb, var(--primary) 50%, #fff));
+    /* background: linear-gradient(90deg, var(--primary), color-mix(in srgb, var(--primary) 50%, #fff)); */
+    background: linear-gradient(135deg, #3494ff, #006dff);
+    box-shadow: 0 10px 30px rgba(0, 109, 255, 0.35);
     color: var(--text);
     display: inline-flex;
     align-items: center;

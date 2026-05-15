@@ -30,6 +30,11 @@ export const DashboardContainer = () => {
                     <span>Productos inactivos</span>
                     <strong><Counter value={loading ? 0 : (allProducts.filter((data) => data.isActive === false)).length} /></strong>
                 </div>
+
+                <div className={style.stats__card}>
+                    <span>Productos Populares</span>
+                    <strong><Counter value={loading ? 0 : (allProducts.filter((data) => data.popular === true && data.isActive === true)).length} /></strong>
+                </div>
             </div>
         </div>
     )

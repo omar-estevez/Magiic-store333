@@ -3,10 +3,13 @@ import { useProductStore } from "../../../../store/product.store";
 import { CardProduct } from "../../../commons/CardProduct/CardProduct"
 import style from './GridProducts.module.css'
 import { LoaderSection } from "../../../commons/LoaderSection/LoaderSection";
+import { EmptyGrid } from "../../../commons/EmptyGrid/EmptyGrid";
+import { useNavigate } from "react-router-dom";
 
 export const GridProducts = () => {
 
     const { products, loading, error, getActiveProducts } = useProductStore();
+    const navigate = useNavigate();
 
     useEffect(() => {
         getActiveProducts();
@@ -25,10 +28,13 @@ export const GridProducts = () => {
     return (
         <div className={style.cards__container}>
             {
-                filteredProducts.map((product) => (
-                    <CardProduct key={product.id} object={product} />
-                ))
-            }
+                filteredProducts.length >= 1 ?
+                    (filteredProducts.map((product) => (
+                        <CardProduct key={product.id} object={product} />
+                    ))
+                    ) : (
+                        <EmptyGrid showBtn functionBtn={() => navigate("/catalogo")} />
+                    )}
 
         </div>
     )

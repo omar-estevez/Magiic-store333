@@ -44,7 +44,7 @@ export const FilterBar = ({ activeDepartment, selectedTypes, setActiveDepartment
 
     return (
         <div className={style.filterContainer}>
-            <div>
+            {/* <div>
                 <h4>Departamento</h4>
                 <div className={style.dept__container}>
                     {
@@ -76,7 +76,48 @@ export const FilterBar = ({ activeDepartment, selectedTypes, setActiveDepartment
                         </li>
                     ))}
                 </div>
-            </div>
+            </div> */}
+
+            <details className={style.filterGroup}>
+                <summary>
+                    <h4>Departamento</h4>
+                </summary>
+
+                <div className={style.dept__container}>
+                    {items.map((item) => (
+                        <li
+                            key={item.id}
+                            className={activeDepartment === item.id ? style.active : ""}
+                            onClick={() => departmentClickHandle(item.id)}
+                        >
+                            <span>{item.name}</span>
+                            <span>{activeDepartment === item.id ? "•" : item.count}</span>
+                        </li>
+                    ))}
+                </div>
+            </details>
+
+            <details className={style.filterGroup}>
+                <summary>
+                    <h4>Tipo de producto</h4>
+                </summary>
+
+                <div className={style.type__container}>
+                    {productTypes.map((type) => (
+                        <li key={type.id}>
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={selectedTypes.includes(type.id)}
+                                    onChange={() => toggleTypeHandle(type.id)}
+                                />
+                                <div className={style.checkmark}></div>
+                                <span>{type.name}</span>
+                            </label>
+                        </li>
+                    ))}
+                </div>
+            </details>
 
             <div>
                 <Button as='button' text='Reset' onClick={handleButtonReset} />

@@ -134,7 +134,6 @@ export const useProductStore = create<ProductStore>((set) => ({
             const snapshot = await getDocs(q);
 
             if (snapshot.docs.length === 0) {
-                console.log('entra')
                 set({ loading: false, product: null, error: "Producto no encontrado" });
                 return;
             }

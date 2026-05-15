@@ -80,8 +80,9 @@
 
     .btn__container {
         display: flex;
+        flex-flow: row wrap;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-around;
         margin: 0 2rem 1.5rem;
 
         p {

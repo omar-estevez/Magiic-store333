@@ -3,6 +3,7 @@ import { ProductContainers } from '../productcontainers/ProductContainers';
 import style from './PaginatedItems.module.css';
 import type { PaginatedItemsProps } from './PaginatedItems.types';
 import { LoaderSection } from '../../../../commons/LoaderSection/LoaderSection';
+import { EmptyGrid } from '../../../../commons/EmptyGrid/EmptyGrid';
 
 export const PaginatedItems = ({ itemsPerPage, activeDepartment, selectedTypes, products, loading, error, searchText }: PaginatedItemsProps) => {
 
@@ -33,35 +34,42 @@ export const PaginatedItems = ({ itemsPerPage, activeDepartment, selectedTypes, 
 
     return (
         <>
-            <ProductContainers itemsArray={currentItems} />
+            {products.length >= 1 ? (
+                <>
+                    <ProductContainers itemsArray={currentItems} />
 
-            <div className={style.pagination}>
-                <button
-                    className={style.pagination__btn}
-                    disabled={page === 1}
-                    onClick={() => setPage(page - 1)}
-                >
-                    &lt;
-                </button>
+                    <div className={style.pagination}>
+                        <button
+                            className={style.pagination__btn}
+                            disabled={page === 1}
+                            onClick={() => setPage(page - 1)}
+                        >
+                            &lt;
+                        </button>
 
-                {Array.from({ length: totalPages }, (_, index) => (
-                    <button
-                        key={index}
-                        className={page === index + 1 ? (style.pagination__number__active) : ''}
-                        onClick={() => setPage(index + 1)}
-                    >
-                        {index + 1}
-                    </button>
-                ))}
+                        {Array.from({ length: totalPages }, (_, index) => (
+                            <button
+                                key={index}
+                                className={page === index + 1 ? (style.pagination__number__active) : ''}
+                                onClick={() => setPage(index + 1)}
+                            >
+                                {index + 1}
+                            </button>
+                        ))}
 
-                <button
-                    className={style.pagination__btn}
-                    disabled={page === totalPages}
-                    onClick={() => setPage(page + 1)}
-                >
-                    &gt;
-                </button>
-            </div>
+                        <button
+                            className={style.pagination__btn}
+                            disabled={page === totalPages}
+                            onClick={() => setPage(page + 1)}
+                        >
+                            &gt;
+                        </button>
+                    </div>
+                </>
+            ) : (
+                <EmptyGrid showBtn={false} />
+            )
+            }
         </>
     )
 }

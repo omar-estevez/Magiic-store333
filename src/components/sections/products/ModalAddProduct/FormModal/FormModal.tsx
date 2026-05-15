@@ -31,7 +31,7 @@ export const FormModal = ({ setModalIsOpen, idProduct, initialValues }: FormModa
     const [, setUploadedUrls] = useState<string[]>([]);
     const [uploading, setUploading] = useState(false);
 
-    const { addProduct, updateProduct } = useProductStore();
+    const { addProduct, updateProduct, getAllProducts } = useProductStore();
 
     const currentSizes = sizeOptions[productForm.category]?.[productForm.department] || [];
 
@@ -196,6 +196,8 @@ export const FormModal = ({ setModalIsOpen, idProduct, initialValues }: FormModa
 
             await updateDoc(doc(db, "products", productId), { imageUrl: imageUrls });
 
+            await getAllProducts();
+
             setErrors({});
         } catch (error) {
             console.error(error);
@@ -276,7 +278,7 @@ export const FormModal = ({ setModalIsOpen, idProduct, initialValues }: FormModa
                             value={productForm.name}
                             onChange={(e) => setProductForm({ ...productForm, name: e.target.value })}
                             autoComplete="off"
-                            maxLength={16}
+                            maxLength={50}
                         />
                         {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
                     </div>

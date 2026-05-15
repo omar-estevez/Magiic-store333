@@ -1,13 +1,13 @@
 .product__container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(240px, 1fr));
     gap: 1.8rem;
     margin: 1.8rem 0.5rem;
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
     .product__container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(230px, 1fr));
     }
 }
 

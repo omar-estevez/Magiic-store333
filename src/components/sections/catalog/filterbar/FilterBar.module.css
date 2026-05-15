@@ -8,52 +8,144 @@
         letter-spacing: 0.15rem;
     }
 
-    .dept__container {
-        list-style: none;
 
-        li {
+
+    .filterGroup {
+        margin-bottom: 1.5rem;
+
+        summary {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            margin: 1rem;
-            color: var(--text-secondary);
+            list-style: none;
             cursor: pointer;
-            transition: 0.2s;
+            margin-bottom: 1rem;
 
-            &.active {
-                span {
-                    color: var(--primary);
-                    font-weight: bold;
-                }
+            &::-webkit-details-marker {
+                display: none;
+            }
+
+            &::after {
+                content: "+";
+                color: var(--secondary);
+                font-size: 1.3rem;
+                font-weight: bold;
+                transition: transform .2s ease;
             }
         }
-    }
 
-    .type__container {
-        list-style: none;
+        &[open] summary::after {
+            content: '−';
+            transform: rotate(180deg);
+        }
 
-        li {
-            margin: 1rem;
+        .dept__container {
+            list-style: none;
 
-            label {
+            li {
                 display: flex;
-                align-items: center;
-                gap: 14px;
-                cursor: pointer;
+                justify-content: space-between;
+                margin: 1rem;
                 color: var(--text-secondary);
-                font-weight: 600;
-            }
-
-            input {
-                width: 1.2rem;
-                height: 1.2rem;
-                accent-color: var(--primary);
                 cursor: pointer;
+                transition: 0.2s;
 
-                &:checked+span {
-                    color: var(--text-secondary);
+                &.active {
+                    span {
+                        color: var(--primary);
+                        font-weight: bold;
+                    }
                 }
             }
         }
+
+        .type__container {
+            list-style: none;
+
+            li {
+                margin: 1rem;
+
+                label {
+                    display: flex;
+                    align-items: center;
+                    gap: 14px;
+                    cursor: pointer;
+                    color: var(--text-secondary);
+                    font-weight: 600;
+                    transition: color var(--transition);
+                }
+
+                input {
+                    display: none;
+                    /* width: 1.2rem;
+                    height: 1.2rem;
+                    accent-color: var(--primary);
+                    cursor: pointer; */
+
+                    &:checked+.checkmark {
+                        border-color: var(--primary);
+
+                        background: rgba(0, 122, 255, .12);
+
+                        box-shadow:
+                            0 0 12px rgba(0, 122, 255, .18);
+                    }
+
+                    &:checked+.checkmark::after {
+                        transform: scale(1);
+                    }
+
+                    &:checked~span {
+                        color: var(--text);
+                    }
+
+                    &:hover .checkmark {
+                        transform: translateY(-1px);
+
+                        border-color: var(--primary);
+                    }
+                }
+
+                .checkmark {
+                    width: 22px;
+                    height: 22px;
+
+                    border-radius: 6px;
+
+                    border: 1px solid var(--border);
+
+                    background: rgba(255, 255, 255, .03);
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    transition:
+                        background var(--transition),
+                        border-color var(--transition),
+                        transform var(--transition),
+                        box-shadow var(--transition);
+
+                    position: relative;
+
+                    &::after {
+                        content: '';
+
+                        width: 10px;
+                        height: 10px;
+
+                        border-radius: 3px;
+
+                        background: var(--primary);
+
+                        transform: scale(0);
+
+                        transition: transform var(--transition);
+                    }
+                }
+            }
+        }
+
     }
 }
 
@@ -61,6 +153,15 @@
 @media (min-width: 768px) and (max-width: 1023px) {
     .filterContainer {
         display: flex;
+        flex-flow: column wrap;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 767px) {
+    .filterContainer {
+        display: flex;
+        flex-flow: column wrap;
         justify-content: space-between;
     }
 }

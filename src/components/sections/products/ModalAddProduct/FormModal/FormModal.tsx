@@ -357,7 +357,7 @@ export const FormModal = ({ setModalIsOpen, idProduct, initialValues }: FormModa
                                     id={size}
                                     type="number"
                                     name={size}
-                                    placeholder={`talla ${size}`}
+                                    placeholder={`${size}`}
                                     value={stock[size] || ""}
                                     onChange={handleChangeValue}
                                 />

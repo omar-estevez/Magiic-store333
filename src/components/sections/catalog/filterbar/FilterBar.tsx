@@ -1,19 +1,12 @@
 import style from './FilterBar.module.css';
 import { Button } from '../../../commons/Button/Button';
 import type { FilterBarProps } from './FilterBar.types';
+import { categoryOptions } from '../../../../data/product';
 
 const initialItems = [
-    { id: 'men', name: "Hombre", count: 124 },
-    { id: 'women', name: "Mujer", count: 102 },
-    { id: 'child', name: "Ninnos", count: 56 },
-];
-
-const productTypes = [
-    { id: 'jackets', name: "Chaquetas" },
-    { id: 'shirts', name: "Camisas" },
-    { id: 'pants', name: "Pantalones" },
-    { id: 'shoes', name: "Zapatos" },
-    { id: 'accesories', name: "Accesorios" },
+    { id: 'men', name: "Hombre", count: 0 },
+    { id: 'women', name: "Mujer", count: 0 },
+    { id: 'child', name: "Ninnos", count: 0 },
 ];
 
 export const FilterBar = ({ activeDepartment, selectedTypes, setActiveDepartment, setSelectedTypes, products, setSearchText }: FilterBarProps) => {
@@ -103,16 +96,16 @@ export const FilterBar = ({ activeDepartment, selectedTypes, setActiveDepartment
                 </summary>
 
                 <div className={style.type__container}>
-                    {productTypes.map((type) => (
-                        <li key={type.id}>
+                    {categoryOptions.map((type) => (
+                        <li key={type.value}>
                             <label>
                                 <input
                                     type="checkbox"
-                                    checked={selectedTypes.includes(type.id)}
-                                    onChange={() => toggleTypeHandle(type.id)}
+                                    checked={selectedTypes.includes(type.value)}
+                                    onChange={() => toggleTypeHandle(type.value)}
                                 />
                                 <div className={style.checkmark}></div>
-                                <span>{type.name}</span>
+                                <span>{type.label}</span>
                             </label>
                         </li>
                     ))}
